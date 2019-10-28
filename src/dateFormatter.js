@@ -24,4 +24,4 @@ const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
   return dateToFormatString === systemDateString ? "TODAY" : dateToFormatString;
 };
 
-export { compareDates };
+export { formatToDateString, compareDates };
