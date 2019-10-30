@@ -28,3 +28,11 @@ describe("when the system date and the date to format do not match", () => {
     expect(formatToDateString(dateTimeToFormat).slice(3, 5)).toBe("01");
   });
 });
+
+describe("when the date to format is the system dates yesterday", () => {
+  it("return 'YESTERDAY'", () => {
+    const systemDateTime = new Date(2018, December, 15, 10, 5).getTime();
+    const dateTimeToFormat = new Date(2018, December, 14, 12, 50).getTime(); //Same day different time
+    expect(compareDates(dateTimeToFormat, systemDateTime)).toBe("YESTERDAY");
+  });
+});

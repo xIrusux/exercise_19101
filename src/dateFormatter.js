@@ -7,9 +7,6 @@ const formatToDateString = (dateTimeMillis, calculateYesterday) => {
     yesterdayDateInstance.setDate(yesterdayDateInstance.getDate() - 1);
     return yesterdayDateInstance;
   }
-  // console.log(yesterdayDateInstance);
-  // if (yesterdayDateInstance !== {}) {
-  // }
   const dateInstance = new Date(dateTimeMillis);
 
   const year = dateInstance.getFullYear();
@@ -28,17 +25,19 @@ const formatToDateString = (dateTimeMillis, calculateYesterday) => {
 // if the first argument does not match the second, return the first argumet in format 'DD/MM/YYYY'
 
 const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
-  let yesterdaySystemDateString = formatToDateString(
+  const yesterdaySystemDateString = formatToDateString(
     systemDateTimeMillis,
     true
   );
-  let systemDateString = formatToDateString(systemDateTimeMillis, false);
-  let dateToFormatString = formatToDateString(dateToFormatTimeMillis, false);
+  const compareSystemDateTimeMillis = new Date(dateToFormatTimeMillis);
+  const systemDateString = formatToDateString(systemDateTimeMillis, false);
+  const dateToFormatString = formatToDateString(dateToFormatTimeMillis, false);
 
   if (dateToFormatString === systemDateString) {
     return "TODAY";
   } else if (
-    yesterdaySystemDateString.toDateString() === systemDateString.toDateString()
+    yesterdaySystemDateString.toDateString() ===
+    compareSystemDateTimeMillis.toDateString()
   ) {
     return "YESTERDAY";
   } else {
