@@ -29,7 +29,7 @@ const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
     systemDateTimeMillis,
     true
   );
-  const compareSystemDateTimeMillis = new Date(dateToFormatTimeMillis);
+  const compareableDateToFormatTimeMillis = new Date(dateToFormatTimeMillis);
   const systemDateString = formatToDateString(systemDateTimeMillis, false);
   const dateToFormatString = formatToDateString(dateToFormatTimeMillis, false);
 
@@ -37,7 +37,7 @@ const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
     return "TODAY";
   } else if (
     yesterdaySystemDateString.toDateString() ===
-    compareSystemDateTimeMillis.toDateString()
+    compareableDateToFormatTimeMillis.toDateString()
   ) {
     return "YESTERDAY";
   } else {
