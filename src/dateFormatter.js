@@ -15,30 +15,34 @@ const formatToDateString = dateTimeMillis => {
   return dateString;
 };
 
+// create yesterday date of the systemdate
+
 const calculateSystemYesterday = dateTimeMillis => {
-  let yesterdayDateInstance = {};
-  yesterdayDateInstance = new Date(dateTimeMillis);
+  let yesterdayDateInstance = new Date(dateTimeMillis);
   yesterdayDateInstance.setDate(yesterdayDateInstance.getDate() - 1);
   return yesterdayDateInstance;
 };
 
 // compare the two dateStrings and return "TODAY" if they match
+// return "YESTERDAY" if datetoFormat is the systemDate's yesterday
 // if the first argument does not match the second, return the first argumet in format 'DD/MM/YYYY'
 
 const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
   const yesterdaySystemDateString = calculateSystemYesterday(
     systemDateTimeMillis
-  );
-  const compareableDateToFormatTimeMillis = new Date(dateToFormatTimeMillis);
-  const systemDateString = formatToDateString(systemDateTimeMillis);
+  ).toDateString();
+  const compareableDateToFormat = new Date(
+    dateToFormatTimeMillis
+  ).toDateString();
+  const compareableSystemDateString = new Date(
+    systemDateTimeMillis
+  ).toDateString();
+
   const dateToFormatString = formatToDateString(dateToFormatTimeMillis);
 
-  if (dateToFormatString === systemDateString) {
+  if (compareableDateToFormat === compareableSystemDateString) {
     return "TODAY";
-  } else if (
-    yesterdaySystemDateString.toDateString() ===
-    compareableDateToFormatTimeMillis.toDateString()
-  ) {
+  } else if (compareableDateToFormat === yesterdaySystemDateString) {
     return "YESTERDAY";
   } else {
     return dateToFormatString;
