@@ -32,12 +32,15 @@ const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
     systemDateTimeMillis,
     true
   );
-  console.log(yesterdaySystemDateString);
   let systemDateString = formatToDateString(systemDateTimeMillis, false);
   let dateToFormatString = formatToDateString(dateToFormatTimeMillis, false);
 
   if (dateToFormatString === systemDateString) {
     return "TODAY";
+  } else if (
+    yesterdaySystemDateString.toDateString() === systemDateString.toDateString()
+  ) {
+    return "YESTERDAY";
   } else {
     return dateToFormatString;
   }
