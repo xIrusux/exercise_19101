@@ -2,6 +2,8 @@
 
 const formatToDateString = dateTimeMillis => {
   const dateInstance = new Date(dateTimeMillis);
+  // dateInstance.setDate(dateInstance.getDate() - 1);
+
   const year = dateInstance.getFullYear();
   const month = (dateInstance.getMonth() + 1).toString();
   const day = dateInstance.getDate().toString();
@@ -21,7 +23,10 @@ const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
   let systemDateString = formatToDateString(systemDateTimeMillis);
   let dateToFormatString = formatToDateString(dateToFormatTimeMillis);
 
-  return dateToFormatString === systemDateString ? "TODAY" : dateToFormatString;
+  if (dateToFormatString === systemDateString) {
+    return "TODAY";
+  } else {
+    return dateToFormatString;
+  }
 };
-
 export { formatToDateString, compareDates };
