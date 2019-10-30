@@ -1,8 +1,12 @@
 // format date in milliseconds to a date string 'DD/MM/YYYY'
 
-const formatToDateString = dateTimeMillis => {
+const formatToDateString = (dateTimeMillis, calculateYesterday) => {
+  if (calculateYesterday === true) {
+    const yesterdayDateInstance = new Date(dateTimeMillis);
+    yesterdayDateInstance.setDate(yesterdayDateInstance.getDate() - 1);
+    console.log(yesterdayDateInstance);
+  }
   const dateInstance = new Date(dateTimeMillis);
-  // dateInstance.setDate(dateInstance.getDate() - 1);
 
   const year = dateInstance.getFullYear();
   const month = (dateInstance.getMonth() + 1).toString();
@@ -20,8 +24,8 @@ const formatToDateString = dateTimeMillis => {
 // if the first argument does not match the second, return the first argumet in format 'DD/MM/YYYY'
 
 const compareDates = (dateToFormatTimeMillis, systemDateTimeMillis) => {
-  let systemDateString = formatToDateString(systemDateTimeMillis);
-  let dateToFormatString = formatToDateString(dateToFormatTimeMillis);
+  let systemDateString = formatToDateString(systemDateTimeMillis, true);
+  let dateToFormatString = formatToDateString(dateToFormatTimeMillis, false);
 
   if (dateToFormatString === systemDateString) {
     return "TODAY";
